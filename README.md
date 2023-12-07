@@ -1,16 +1,26 @@
-# expenses
+# ExpenserExplore (Explorador de Despesas)
 
-A new Flutter project.
+Um aplicativo de finanças pessoais desenvolvido com Flutter para rastreamento de despesas e gerenciamento de orçamento.
 
-## Getting Started
+## Recursos Principais
 
-This project is a starting point for a Flutter application.
+- Rastreamento de despesas em tempo real
+- Categorização intuitiva de transações
+- Visualização de saldo e relatórios detalhados
 
-A few resources to get you started if this is your first Flutter project:
+## Tecnologias Utilizadas
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter para o desenvolvimento multiplataforma (iOS e Android)
+- Dart como linguagem de programação
+- Integração com APIs para dados financeiros (opcional)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Instruções de Uso
+
+1. Clone o repositório
+2. Certifique-se de ter o Flutter instalado em sua máquina
+3. Execute o aplicativo usando `flutter run`
+
+## Estado do Projeto
+
+Este projeto está em desenvolvimento ativo.
+

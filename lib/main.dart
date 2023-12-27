@@ -1,7 +1,7 @@
+import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'components/transaction_list.dart';
-import 'package:expenses/components/transaction_form.dart';
 import 'components/chart.dart';
 import 'models/transaction.dart';
 
@@ -52,26 +52,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: 't0',
-      title: 'Conta Antiga',
-      value: 400.00,
-      date: DateTime.now().subtract(const Duration(days: 33)),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de Corrida',
-      value: 310.76,
-      date: DateTime.now().subtract(const Duration(days: 3)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de Luz',
-      value: 211.30,
-      date: DateTime.now().subtract(const Duration(days: 4)),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
@@ -81,12 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
@@ -94,6 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) => tr.id == id);
+    });
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -107,22 +94,33 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: const Text('Despesas Pessoais'),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(context),
+        ),
+      ],
+    );
+
+    final availabelHeight =
+        MediaQuery.of(context).size.height - appBar.preferredSize.height;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Despesas Pessoais'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () => _openTransactionFormModal(context),
-          ),
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(_recentTransactions),
-            TransactionList(_transactions),
+            SizedBox(
+              height: availabelHeight * 0.3,
+              child: Chart(_recentTransactions),
+            ),
+            SizedBox(
+              height: availabelHeight * 0.6,
+              child: TransactionList(_transactions, _removeTransaction),
+            ),
           ],
         ),
       ),

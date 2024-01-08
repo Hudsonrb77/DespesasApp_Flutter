@@ -1,6 +1,7 @@
 import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
 import 'components/chart.dart';
 import 'models/transaction.dart';
@@ -17,17 +18,17 @@ class ExpensesApp extends StatelessWidget {
       home: const MyHomePage(),
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
-          primary: Colors.blue[900],
-          secondary: Colors.amber[800],
+          primary: Colors.purple,
+          secondary: Colors.amber,
         ),
         textTheme: tema.textTheme.copyWith(
-          titleLarge: const TextStyle(
+          headline6: const TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-          labelLarge: const TextStyle(
+          button: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -105,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    final availabelHeight = MediaQuery.of(context).size.height -
+    final availableHeight = MediaQuery.of(context).size.height -
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top;
 
@@ -131,12 +132,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             if (_showChart)
               SizedBox(
-                height: availabelHeight * 0.30,
+                height: availableHeight * 0.3,
                 child: Chart(_recentTransactions),
               ),
             if (!_showChart)
               SizedBox(
-                height: availabelHeight * 0.70,
+                height: availableHeight * 0.7,
                 child: TransactionList(_transactions, _removeTransaction),
               ),
           ],
